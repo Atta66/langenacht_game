@@ -1,0 +1,52 @@
+"""
+Configuration file for the drone swarm game.
+Contains all game constants and default values.
+"""
+
+# Window settings
+WINDOW_WIDTH = 1200
+WINDOW_HEIGHT = 800
+FPS = 60
+BACKGROUND_COLOR = (20, 20, 30)
+
+# Drone settings
+NUM_DRONES = 30
+DRONE_SIZE = 5
+DRONE_COLOR = (100, 200, 255)
+MAX_SPEED = 4.0
+MAX_FORCE = 0.1
+
+# Boids algorithm default values
+DEFAULT_SEPARATION = 1.5
+DEFAULT_ALIGNMENT = 1.0
+DEFAULT_COHESION = 1.0
+PERCEPTION_RADIUS = 50
+
+# Pathway settings
+PATHWAY_WIDTH = 150
+PATHWAY_SEGMENT_LENGTH = 200
+NUM_SEGMENTS = 5
+PATHWAY_COLOR = (50, 50, 50)
+GATE_COLOR = (100, 255, 100)
+GATE_THICKNESS = 5
+
+# UI settings
+SLIDER_WIDTH = 200
+SLIDER_HEIGHT = 20
+SLIDER_X = 20
+SLIDER_Y_START = 20
+SLIDER_SPACING = 80
+SLIDER_COLOR = (100, 100, 100)
+SLIDER_HANDLE_COLOR = (200, 200, 200)
+TEXT_COLOR = (255, 255, 255)
+FONT_SIZE = 20
+
+# Slider ranges
+SEPARATION_RANGE = (0.0, 3.0)
+ALIGNMENT_RANGE = (0.0, 2.0)
+COHESION_RANGE = (0.0, 2.0)
+
+# Game settings
+GOAL_RADIUS = 30
+GOAL_COLOR = (255, 200, 50)
+SUCCESS_THRESHOLD = 0.8  # 80% of drones need to reach goal
