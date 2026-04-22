@@ -9,11 +9,12 @@ import config
 class Pathway:
     """Represents a pathway with segments and gates that drones must pass through."""
     
-    def __init__(self):
+    def __init__(self, difficulty_config=None):
         """Generate a random pathway."""
         self.segments = []
         self.gates = []
         self.goal = None
+        self.difficulty_config = difficulty_config or config.DIFFICULTY_LEVELS['medium']
         self.generate_pathway()
     
     def generate_pathway(self):
@@ -21,12 +22,15 @@ class Pathway:
         self.segments = []
         self.gates = []
         
-        # Starting position
-        current_x = 100
+        # Starting position - center vertically, leave margin on left for UI
+        current_x = 400
         current_y = config.WINDOW_HEIGHT // 2
         
-        # Generate segments
-        for i in range(config.NUM_SEGMENTS):
+        # Generate segments using difficulty config
+        num_segments = self.difficulty_config['num_segments']
+        pathway_width = self.difficulty_config['pathway_width']
+        
+        for i in range(num_segments):
             # Random offset for next segment
             offset_x = random.randint(100, config.PATHWAY_SEGMENT_LENGTH)
             offset_y = random.randint(-150, 150)
@@ -41,7 +45,7 @@ class Pathway:
             # Create gate at this position
             gate = {
                 'position': Vector2D(next_x, next_y),
-                'width': config.PATHWAY_WIDTH,
+                'width': pathway_width,
                 'passed': False
             }
             self.gates.append(gate)

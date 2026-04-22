@@ -72,10 +72,14 @@ class Slider:
 class UI:
     """Manages all UI elements."""
     
-    def __init__(self):
+    def __init__(self, difficulty_config=None):
         """Initialize UI with sliders."""
         pygame.font.init()
         self.font = pygame.font.Font(None, config.FONT_SIZE)
+        
+        # Use difficulty config if provided
+        if difficulty_config is None:
+            difficulty_config = config.DIFFICULTY_LEVELS['medium']
         
         # Create sliders
         self.separation_slider = Slider(
@@ -83,8 +87,8 @@ class UI:
             config.SLIDER_Y_START,
             config.SLIDER_WIDTH,
             config.SLIDER_HEIGHT,
-            config.SEPARATION_RANGE[0],
-            config.SEPARATION_RANGE[1],
+            difficulty_config['separation_range'][0],
+            difficulty_config['separation_range'][1],
             config.DEFAULT_SEPARATION,
             "Separation"
         )
@@ -94,8 +98,8 @@ class UI:
             config.SLIDER_Y_START + config.SLIDER_SPACING,
             config.SLIDER_WIDTH,
             config.SLIDER_HEIGHT,
-            config.ALIGNMENT_RANGE[0],
-            config.ALIGNMENT_RANGE[1],
+            difficulty_config['alignment_range'][0],
+            difficulty_config['alignment_range'][1],
             config.DEFAULT_ALIGNMENT,
             "Alignment"
         )
@@ -105,8 +109,8 @@ class UI:
             config.SLIDER_Y_START + config.SLIDER_SPACING * 2,
             config.SLIDER_WIDTH,
             config.SLIDER_HEIGHT,
-            config.COHESION_RANGE[0],
-            config.COHESION_RANGE[1],
+            difficulty_config['cohesion_range'][0],
+            difficulty_config['cohesion_range'][1],
             config.DEFAULT_COHESION,
             "Cohesion"
         )
@@ -126,6 +130,42 @@ class UI:
         """Draw all UI elements."""
         for slider in self.sliders:
             slider.draw(surface, self.font)
+        
+        # Draw slider descriptions
+        self.draw_slider_descriptions(surface)
+    
+    def draw_slider_descriptions(self, surface):
+        """Draw helpful descriptions next to sliders."""
+        small_font = pygame.font.Font(None, 22)
+        
+        # Descriptions for each slider
+        descriptions = {
+            'separation': 'Drones either ignore or avoid nearby drones',
+            'alignment': 'Nearby drones move in sync & parallel',
+            'cohesion': 'Drones move towards the center of nearby drones'
+        }
+        
+        # Colors for descriptions
+        colors = {
+            'separation': (150, 100, 100),
+            'alignment': (100, 150, 100),
+            'cohesion': (100, 100, 150)
+        }
+        
+        # Draw descriptions next to sliders
+        sliders_info = [
+            ('separation', self.separation_slider, config.SLIDER_Y_START),
+            ('alignment', self.alignment_slider, config.SLIDER_Y_START + config.SLIDER_SPACING),
+            ('cohesion', self.cohesion_slider, config.SLIDER_Y_START + config.SLIDER_SPACING * 2)
+        ]
+        
+        for key, slider, y_pos in sliders_info:
+            desc_text = small_font.render(descriptions[key], True, colors[key])
+            surface.blit(desc_text, (config.SLIDER_X + config.SLIDER_WIDTH + 40, y_pos - 5))
+            
+            # Draw current value
+            value_text = small_font.render(f"({slider.value:.1f})", True, colors[key])
+            surface.blit(value_text, (config.SLIDER_X + config.SLIDER_WIDTH + 40, y_pos + 18))
     
     def get_values(self):
         """Get current values from sliders."""
@@ -135,16 +175,34 @@ class UI:
             'cohesion': self.cohesion_slider.value
         }
     
+    def reset_sliders(self):
+        """Reset all sliders to default values."""
+        self.separation_slider.value = config.DEFAULT_SEPARATION
+        self.separation_slider.update_handle_position()
+        
+        self.alignment_slider.value = config.DEFAULT_ALIGNMENT
+        self.alignment_slider.update_handle_position()
+        
+        self.cohesion_slider.value = config.DEFAULT_COHESION
+        self.cohesion_slider.update_handle_position()
+    
     def draw_instructions(self, surface):
         """Draw instructions and game info."""
+        small_font = pygame.font.Font(None, 26)
+        tiny_font = pygame.font.Font(None, 22)
+        
+        # Main instructions
         instructions = [
-            "Adjust sliders to help drones navigate through gates",
-            "Press R to reset pathway",
-            "Press SPACE to restart with same pathway"
+            "🎮 Adjust sliders to guide the swarm through gates to the goal",
+            "⌨️ R: new pathway | SPACE: restart | M: menu"
         ]
         
-        y_offset = config.WINDOW_HEIGHT - 100
+        y_offset = config.WINDOW_HEIGHT - 110
         for instruction in instructions:
-            text = self.font.render(instruction, True, config.TEXT_COLOR)
+            text = small_font.render(instruction, True, config.TEXT_COLOR)
             surface.blit(text, (config.SLIDER_X, y_offset))
-            y_offset += 25
+            y_offset += 30
+        
+        # Quick tips
+        tip_text = tiny_font.render("💡 Tip: Balance all 3 sliders for best results", True, (150, 150, 100))
+        surface.blit(tip_text, (config.SLIDER_X, config.WINDOW_HEIGHT - 35))

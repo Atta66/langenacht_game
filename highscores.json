@@ -1,0 +1,89 @@
+{
+  "scores": [
+    {
+      "difficulty": "easy",
+      "time": 22.14,
+      "player": "atta"
+    },
+    {
+      "difficulty": "easy",
+      "time": 23.95,
+      "player": "chatty"
+    },
+    {
+      "difficulty": "easy",
+      "time": 31.05,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "easy",
+      "time": 58.16,
+      "player": "atta"
+    },
+    {
+      "difficulty": "easy",
+      "time": 61.29,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "easy",
+      "time": 62.39,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "easy",
+      "time": 130.4,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "easy",
+      "time": 146.39,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "hard",
+      "time": 34.35,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "hard",
+      "time": 58.27,
+      "player": "sdfs"
+    },
+    {
+      "difficulty": "hard",
+      "time": 65.14,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "hard",
+      "time": 413.57,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "medium",
+      "time": 20.87,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "medium",
+      "time": 28.7,
+      "player": "Anonymous"
+    },
+    {
+      "difficulty": "medium",
+      "time": 41.1,
+      "player": "atta"
+    },
+    {
+      "difficulty": "medium",
+      "time": 67.75,
+      "player": "theo"
+    },
+    {
+      "difficulty": "medium",
+      "time": 67.96,
+      "player": "ata"
+    }
+  ]
+}

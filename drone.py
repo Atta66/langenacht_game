@@ -28,7 +28,26 @@ class Drone:
         self.velocity = self.velocity + self.acceleration
         self.velocity = self.velocity.limit(config.MAX_SPEED)
         self.position = self.position + self.velocity
+        self.handle_boundaries()
         self.acceleration = Vector2D(0, 0)
+    
+    def handle_boundaries(self):
+        """Keep drone inside window and deflect from walls."""
+        # Left and right boundaries
+        if self.position.x < 0:
+            self.position.x = 0
+            self.velocity.x = abs(self.velocity.x)  # Reverse x direction
+        elif self.position.x > config.WINDOW_WIDTH:
+            self.position.x = config.WINDOW_WIDTH
+            self.velocity.x = -abs(self.velocity.x)  # Reverse x direction
+        
+        # Top and bottom boundaries
+        if self.position.y < 0:
+            self.position.y = 0
+            self.velocity.y = abs(self.velocity.y)  # Reverse y direction
+        elif self.position.y > config.WINDOW_HEIGHT:
+            self.position.y = config.WINDOW_HEIGHT
+            self.velocity.y = -abs(self.velocity.y)  # Reverse y direction
     
     def separation(self, drones, weight):
         """
