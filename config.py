@@ -72,7 +72,7 @@ DIFFICULTY_LEVELS = {
         'separation_range': (0.0, 3.0),
         'alignment_range': (0.0, 3.0),
         'cohesion_range': (0.0, 1.5),
-        'seek_weight': 0.25,
+        'seek_weight': 0.40,
         'success_threshold': 0.8,
     },
     'hard': {

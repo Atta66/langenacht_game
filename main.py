@@ -12,7 +12,7 @@ def show_name_input(elapsed_time):
     """Show name input screen for high score."""
     pygame.init()
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT), pygame.FULLSCREEN)
-    pygame.display.set_caption("Drone Swarm - Enter Your Name")
+    pygame.display.set_caption("Swarm - Enter Your Name")
     clock = pygame.time.Clock()
     font_large = pygame.font.Font(None, 64)
     font_medium = pygame.font.Font(None, 48)
@@ -76,7 +76,7 @@ def show_main_menu():
     """Show main menu."""
     pygame.init()
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT), pygame.FULLSCREEN)
-    pygame.display.set_caption("Drone Swarm - Main Menu")
+    pygame.display.set_caption("Swarm - Main Menu")
     clock = pygame.time.Clock()
     font_large = pygame.font.Font(None, 64)
     font_small = pygame.font.Font(None, 32)
@@ -102,7 +102,7 @@ def show_main_menu():
         screen.fill((20, 20, 30))
         
         # Title
-        title = font_large.render("DRONE SWARM", True, (100, 255, 100))
+        title = font_large.render("SWARM", True, (100, 255, 100))
         title_rect = title.get_rect(center=(config.WINDOW_WIDTH // 2, config.WINDOW_HEIGHT // 8))
         screen.blit(title, title_rect)
         
@@ -127,7 +127,7 @@ def show_high_scores_menu():
     """Show high scores menu with all 3 categories in columns."""
     pygame.init()
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT), pygame.FULLSCREEN)
-    pygame.display.set_caption("Drone Swarm - High Scores")
+    pygame.display.set_caption("Swarm - High Scores")
     clock = pygame.time.Clock()
     font_title = pygame.font.Font(None, 48)
     font_category = pygame.font.Font(None, 36)
@@ -146,9 +146,6 @@ def show_high_scores_menu():
                 if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
                     pygame.quit()
                     return
-                elif event.key == pygame.K_c:
-                    # Clear scores
-                    high_score_manager.clear_scores()
         
         screen.fill((20, 20, 30))
         
@@ -189,7 +186,7 @@ def show_high_scores_menu():
                 screen.blit(no_scores, (x_pos - 40, config.WINDOW_HEIGHT * 0.2))
         
         # Instructions
-        instructions = font_small.render("Press ESC to go back | C to clear all scores", True, (200, 200, 200))
+        instructions = font_small.render("Press ESC to go back", True, (200, 200, 200))
         instructions_rect = instructions.get_rect(center=(config.WINDOW_WIDTH // 2, config.WINDOW_HEIGHT * 0.95))
         screen.blit(instructions, instructions_rect)
         
@@ -199,7 +196,7 @@ def show_difficulty_menu():
     """Show difficulty selection menu."""
     pygame.init()
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT), pygame.FULLSCREEN)
-    pygame.display.set_caption("Drone Swarm - Select Difficulty")
+    pygame.display.set_caption("Swarm - Select Difficulty")
     clock = pygame.time.Clock()
     font_large = pygame.font.Font(None, 64)
     font_medium = pygame.font.Font(None, 48)
@@ -215,9 +212,9 @@ def show_difficulty_menu():
                 return None
             
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_UP:
                     selected = max(0, selected - 1)
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_DOWN:
                     selected = min(len(difficulties) - 1, selected + 1)
                 elif event.key == pygame.K_RETURN:
                     pygame.quit()
@@ -248,7 +245,7 @@ def show_difficulty_menu():
             screen.blit(diff_config, (config.WINDOW_WIDTH // 6, y))
         
         # Instructions
-        instructions = font_small.render("Use LEFT/RIGHT arrows to select, ENTER to start, ESC to go back", True, (200, 200, 200))
+        instructions = font_small.render("Use UP/DOWN arrows to select, ENTER to start, ESC to go back", True, (200, 200, 200))
         instructions_rect = instructions.get_rect(center=(config.WINDOW_WIDTH // 2, config.WINDOW_HEIGHT * 0.9))
         screen.blit(instructions, instructions_rect)
         
